@@ -237,5 +237,19 @@ var map = new mapboxgl.Map({
 });
 
 map.on('load', function (){
+
+  map.addLayer({
+    id: 'locations',
+    type: 'symbol',
+    source: {
+      type: 'geojson',
+      data: country
+    },
+    layout: {
+      'icon-image': '{icon}-15',
+      'icon-allow-overlap': true,
+    }
+  });
+
   map.addControl(new mapboxgl.NavigationControl());
 })
