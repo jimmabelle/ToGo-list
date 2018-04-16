@@ -252,8 +252,8 @@ map.on('load', function() {
   });
 
   map.on('click', 'locations', function (e) {
-    var coordinates = e.countries.features[0].geometry.coordinates.slice();
-    var place = e.countries.features[0].properties.place_name;
+    var coordinates = e.features[0].geometry.coordinates.slice();
+    var place = e.features[0].properties.place_name;
 
     console.log(coordinates);
     console.log(place);
