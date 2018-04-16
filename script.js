@@ -247,13 +247,16 @@ map.on('load', function (){
     },
     layout: {
       'icon-image': '{icon}-15',
-      'icon-allow-overlap': true,
+      'icon-allow-overlap': true
     }
   });
 
   map.on('click', 'locations', function (e) {
-    var coordinates = e.data.features[0].geometry.coordinates.slice();
-    var place = e.data.features[0].properties.place_name;
+    var coordinates = e.countries.features[0].geometry.coordinates.slice();
+    var place = e.countries.features[0].properties.place_name;
+
+    console.log(coordinates);
+    console.log(place);
 
     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
@@ -265,11 +268,11 @@ map.on('load', function (){
             .addTo(map);
   });
 
-  map.on('mouseenter', 'places', function () {
+  map.on('mouseenter', 'locations', function () {
         map.getCanvas().style.cursor = 'pointer';
   });
 
-  map.on('mouseleave', 'places', function () {
+  map.on('mouseleave', 'locations', function () {
         map.getCanvas().style.cursor = '';
   });
 
