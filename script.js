@@ -236,7 +236,7 @@ var map = new mapboxgl.Map({
     zoom: 1
 });
 
-map.on('load', function (){
+map.on('load', function() {
 
   map.addLayer({
     id: 'locations',
@@ -246,8 +246,8 @@ map.on('load', function (){
       data: countries
     },
     layout: {
-      'icon-image': '{icon}-15',
-      'icon-allow-overlap': true
+      'icon-image': 'restaurant-15',
+      'icon-allow-overlap': true,
     }
   });
 
@@ -263,9 +263,9 @@ map.on('load', function (){
     }
 
     new mapboxgl.Popup()
-            .setLngLat(coordinates)
-            .setHTML(place)
-            .addTo(map);
+      .setLngLat(coordinates)
+      .setHTML(place)
+      .addTo(map);
   });
 
   map.on('mouseenter', 'locations', function () {
@@ -277,4 +277,5 @@ map.on('load', function (){
   });
 
   map.addControl(new mapboxgl.NavigationControl());
-})
+
+});
