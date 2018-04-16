@@ -1,6 +1,6 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiamltbWFiZWxsZSIsImEiOiJjamZ5MTBjeHAyNnYyMndxbjAyOTI0Y24yIn0.mvyT35xOV0oEtad34I0Vgg';
 
-var country = {
+var countries = {
   "features": [
     {
       "type": "Feature",
@@ -243,13 +243,17 @@ map.on('load', function (){
     type: 'symbol',
     source: {
       type: 'geojson',
-      data: country
+      data: countries
+    },
+    layout: {
+      'icon-image': '{icon}-15',
+      'icon-allow-overlap': true,
     }
   });
 
   map.on('click', 'locations', function (e) {
-    var coordinates = e.features[0].geometry.coordinates.slice();
-    var place = e.features[0].properties.place_name;
+    var coordinates = e.data.features[0].geometry.coordinates.slice();
+    var place = e.data.features[0].properties.place_name;
 
     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
