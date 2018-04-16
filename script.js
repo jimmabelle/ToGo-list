@@ -244,11 +244,29 @@ map.on('load', function (){
     source: {
       type: 'geojson',
       data: country
-    },
-    layout: {
-      'icon-image': '{icon}-15',
-      'icon-allow-overlap': true,
     }
+  });
+
+  map.on('click', 'locations', function (e) {
+    var coordinates = e.features[0].geometry.coordinates.slice();
+    var place = e.features[0].properties.place_name;
+
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+    }
+
+    new mapboxgl.Popup()
+            .setLngLat(coordinates)
+            .setHTML(place)
+            .addTo(map);
+  });
+
+  map.on('mouseenter', 'places', function () {
+        map.getCanvas().style.cursor = 'pointer';
+  });
+
+  map.on('mouseleave', 'places', function () {
+        map.getCanvas().style.cursor = '';
   });
 
   map.addControl(new mapboxgl.NavigationControl());
