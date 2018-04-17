@@ -236,8 +236,7 @@ var map = new mapboxgl.Map({
     zoom: 1
 });
 
-map.on('load', function() {
-
+map.on('load', function () {
   map.addLayer({
     id: 'locations',
     type: 'symbol',
@@ -254,9 +253,6 @@ map.on('load', function() {
   map.on('click', 'locations', function (e) {
     var coordinates = e.features[0].geometry.coordinates.slice();
     var place = e.features[0].properties.place_name;
-
-    console.log(coordinates);
-    console.log(place);
 
     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
@@ -278,4 +274,33 @@ map.on('load', function() {
 
   map.addControl(new mapboxgl.NavigationControl());
 
+  locationList(countries);
+
 });
+
+function locationList(data) {
+  for(var i=0; i<data.features.length; i++) {
+
+    var prop, list, listing, link, details;
+
+    prop = data.features[i].properties;
+    list = document.getElementById('list'); // accesing html element
+    listing = list.appendChild(document.createElement('li')); // creating list element
+    listing.className = 'item';
+    listing.id = 'listing-' + i;
+
+    link = listing.appendChild(document.createElement('a')); // creating anchor element
+    link.href = '#';
+    link.className = 'title';
+    link.dataPosition = i;
+    link.innerHTML = prop.place_name;
+
+    details = listing.appendChild(document.createElement('div')); // creating a div element
+    details.innerHTML = prop.wikidata;
+
+    if (prop.wikidata) {
+      details.innerHTML += ' &middot; ' + prop.wikidata;
+    }
+
+  }
+}
