@@ -255,14 +255,6 @@ map.on('load', function () {
     var place = e.features[0].properties.place_name;
     var data =  e.features[0].properties;
 
-    // var optEl = document.getElementById('options');
-    // var select =document.createElement('select');
-    // var option = select.appendChild(document.createElement('option'));
-    // var option2 = select.appendChild(document.createElement('option'));
-    // option.innerHTML = 'Yes';
-    // option2.innerHTML = 'No';
-
-
     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
     }
@@ -271,10 +263,6 @@ map.on('load', function () {
       .setLngLat(coordinates)
       .setHTML(place)
       .addTo(map);
-
-    // getValue(countries);
-    // locationList(e , k);
-    // k = k + 1;
 
     var ltext = getValue();
     console.log(ltext);
@@ -285,8 +273,6 @@ map.on('load', function () {
 
   });
 
-
-
   map.on('mouseenter', 'locations', function () {
     map.getCanvas().style.cursor = 'pointer';
   });
@@ -296,9 +282,6 @@ map.on('load', function () {
   });
 
   map.addControl(new mapboxgl.NavigationControl());
-
-  // location(countries);
-
 
 });
 
@@ -355,7 +338,13 @@ function locationList(data, i, ltext) {
 
     var msg = ltext;
     var message = details.appendChild(document.createElement('p'));
+    message.className = "ltext";
     message.innerHTML = msg;
+
+    link.addEventListener('click', function(e) {
+      var clickedListing = data.features[this.dataPosition];
+      console.log(clickedListing);
+    });
 
   // }
 }
