@@ -1,5 +1,5 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiamltbWFiZWxsZSIsImEiOiJjamZ5MTBjeHAyNnYyMndxbjAyOTI0Y24yIn0.mvyT35xOV0oEtad34I0Vgg';
-
+var k = 0;
 var countries = {
   "features": [
     {
@@ -253,6 +253,15 @@ map.on('load', function () {
   map.on('click', 'locations', function (e) {
     var coordinates = e.features[0].geometry.coordinates.slice();
     var place = e.features[0].properties.place_name;
+    var data =  e.features[0].properties;
+
+    // var optEl = document.getElementById('options');
+    // var select =document.createElement('select');
+    // var option = select.appendChild(document.createElement('option'));
+    // var option2 = select.appendChild(document.createElement('option'));
+    // option.innerHTML = 'Yes';
+    // option2.innerHTML = 'No';
+
 
     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
@@ -262,29 +271,71 @@ map.on('load', function () {
       .setLngLat(coordinates)
       .setHTML(place)
       .addTo(map);
+
+    // getValue(countries);
+    // locationList(e , k);
+    // k = k + 1;
+
+    var ltext = getValue(countries);
+    console.log(ltext);
+    if (ltext) {
+      locationList(e , k);
+      k++;
+    }
+
   });
 
+
+
   map.on('mouseenter', 'locations', function () {
-        map.getCanvas().style.cursor = 'pointer';
+    map.getCanvas().style.cursor = 'pointer';
   });
 
   map.on('mouseleave', 'locations', function () {
-        map.getCanvas().style.cursor = '';
+    map.getCanvas().style.cursor = '';
   });
 
   map.addControl(new mapboxgl.NavigationControl());
 
-  locationList(countries);
+  location(countries);
+
 
 });
 
-function locationList(data) {
-  for(var i=0; i<data.features.length; i++) {
+// function locationList(data) {
+//   for(var i=0; i<data.features.length; i++) {
+//
+//     var prop, list, listing, link, details;
+//
+//     prop = data.features[i].properties;
+//     list = document.getElementById('list'); // accesing html element
+//     listing = list.appendChild(document.createElement('li')); // creating list element
+//     listing.className = 'item';
+//     listing.id = 'listing-' + i;
+//
+//     link = listing.appendChild(document.createElement('a')); // creating anchor element
+//     link.href = '#';
+//     link.className = 'title';
+//     link.dataPosition = i;
+//     link.innerHTML = prop.place_name;
+//
+//     details = listing.appendChild(document.createElement('div')); // creating div element
+//     details.innerHTML = prop.wikidata;
+//
+//     if (prop.wikidata) {
+//       details.innerHTML += ' &middot; ' + prop.wikidata;
+//     }
+//
+//   }
+// }
+
+function locationList(data, i) {
+  // for(var i=0; i<data.features.length; i++) {
 
     var prop, list, listing, link, details;
 
-    prop = data.features[i].properties;
-    list = document.getElementById('list'); // accesing html element
+    prop = data.features[0].properties;
+    list = document.getElementById('list'); // accesing html element som heter list
     listing = list.appendChild(document.createElement('li')); // creating list element
     listing.className = 'item';
     listing.id = 'listing-' + i;
@@ -295,12 +346,24 @@ function locationList(data) {
     link.dataPosition = i;
     link.innerHTML = prop.place_name;
 
-    details = listing.appendChild(document.createElement('div')); // creating a div element
-    details.innerHTML = prop.wikidata;
+    details = listing.appendChild(document.createElement('div')); // creating div element
+    details.innerHTML = prop.short_code;
 
     if (prop.wikidata) {
       details.innerHTML += ' &middot; ' + prop.wikidata;
     }
 
-  }
+    // var msg = ltext;
+    // var message = details.appendChild(document.createElement('p'));
+    // message.innerHTML = msg;
+
+  // }
 }
+
+function getValue(inpt) {
+    var userInpt = inpt;
+    userInpt = prompt("Add toGo list: ", "Write what you know about the country?");
+    return userInpt;
+
+
+  }
