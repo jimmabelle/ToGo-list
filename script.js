@@ -318,18 +318,18 @@ function locationList(data, i, ltext) {
     var prop, list, listing, link, details;
 
     prop = data.features[0].properties;
-    list = document.getElementById('list'); // accesing html element som heter list
-    listing = list.appendChild(document.createElement('li')); // creating list element
+    list = document.getElementById('list'); // access html element som heter list
+    listing = list.appendChild(document.createElement('li')); // create list element
     listing.className = 'item';
     listing.id = 'listing-' + i;
 
-    link = listing.appendChild(document.createElement('a')); // creating anchor element
+    link = listing.appendChild(document.createElement('a')); // create anchor element
     link.href = '#';
     link.className = 'title';
     link.dataPosition = i;
     link.innerHTML = prop.place_name;
 
-    details = listing.appendChild(document.createElement('div')); // creating div element
+    details = listing.appendChild(document.createElement('div')); // create div element
     details.innerHTML = prop.short_code;
 
     if (prop.wikidata) {
@@ -337,7 +337,7 @@ function locationList(data, i, ltext) {
     }
 
     var msg = ltext;
-    var message = details.appendChild(document.createElement('p'));
+    var message = details.appendChild(document.createElement('p')); // create new element
     message.className = "ltext";
     message.innerHTML = msg;
 
