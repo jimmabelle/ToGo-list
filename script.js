@@ -276,10 +276,10 @@ map.on('load', function () {
     // locationList(e , k);
     // k = k + 1;
 
-    var ltext = getValue(countries);
+    var ltext = getValue();
     console.log(ltext);
     if (ltext) {
-      locationList(e , k);
+      locationList(e , k, ltext);
       k++;
     }
 
@@ -297,7 +297,7 @@ map.on('load', function () {
 
   map.addControl(new mapboxgl.NavigationControl());
 
-  location(countries);
+  // location(countries);
 
 
 });
@@ -329,7 +329,7 @@ map.on('load', function () {
 //   }
 // }
 
-function locationList(data, i) {
+function locationList(data, i, ltext) {
   // for(var i=0; i<data.features.length; i++) {
 
     var prop, list, listing, link, details;
@@ -353,9 +353,9 @@ function locationList(data, i) {
       details.innerHTML += ' &middot; ' + prop.wikidata;
     }
 
-    // var msg = ltext;
-    // var message = details.appendChild(document.createElement('p'));
-    // message.innerHTML = msg;
+    var msg = ltext;
+    var message = details.appendChild(document.createElement('p'));
+    message.innerHTML = msg;
 
   // }
 }
@@ -364,6 +364,4 @@ function getValue(inpt) {
     var userInpt = inpt;
     userInpt = prompt("Add toGo list: ", "Write what you know about the country?");
     return userInpt;
-
-
   }
