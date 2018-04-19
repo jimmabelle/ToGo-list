@@ -1,7 +1,6 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiamltbWFiZWxsZSIsImEiOiJjamZ5MTBjeHAyNnYyMndxbjAyOTI0Y24yIn0.mvyT35xOV0oEtad34I0Vgg';
-// initial list number for todo list
-var k = 0;
-// json data
+var k = 0;  // initial number for todo list
+// geojson data
 var countries = {
   "features": [
     {
@@ -263,13 +262,13 @@ map.on('load', function () {
       .setHTML(place)
       .addTo(map);
 
-    // get the text value from the prompt
+    // access getValue function after clicking
     var ltext = getValue();
     // if the condition is true add to list
     if (ltext) {
-      // location list function
+      // access locationList function
       locationList(e, k, ltext);  // parameter e actual layer, k list number, l text/personal input text
-      k++;
+      k++; // increment the list number
   }
 });
 
@@ -282,9 +281,7 @@ map.on('load', function () {
   });
 
   map.addControl(new mapboxgl.NavigationControl()); // zoom in and out
-
 });
-
 
 function flyToStore(currentFeature) {
   map.flyTo({
@@ -350,7 +347,6 @@ function locationList(data, i, ltext) {
        }
        this.parentNode.classList.add('active');
     });
-
 }
 
 // input text value function and confirmed
