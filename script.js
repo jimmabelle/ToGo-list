@@ -1,5 +1,7 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiamltbWFiZWxsZSIsImEiOiJjamZ5MTBjeHAyNnYyMndxbjAyOTI0Y24yIn0.mvyT35xOV0oEtad34I0Vgg';
+// initial list number for todo list
 var k = 0;
+// json data
 var countries = {
   "features": [
     {
@@ -229,6 +231,7 @@ var countries = {
   "type": "FeatureCollection"
 };
 
+// map features
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v9',
@@ -250,74 +253,64 @@ map.on('load', function () {
     }
   });
 
+  // map click event
   map.on('click', 'locations', function (e) {
     var coordinates = e.features[0].geometry.coordinates.slice();
     var place = e.features[0].properties.place_name;
-    var data =  e.features[0].properties;
-
-    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-    }
 
     new mapboxgl.Popup()
       .setLngLat(coordinates)
       .setHTML(place)
       .addTo(map);
 
+    // get the text value from the prompt
     var ltext = getValue();
-    console.log(ltext);
+    // if the condition is true add to list
     if (ltext) {
-      locationList(e , k, ltext);
+      // location list function
+      locationList(e, k, ltext);  // parameter e actual layer, k list number, l text/personal input text
       k++;
-    }
-
-  });
+  }
+});
 
   map.on('mouseenter', 'locations', function () {
     map.getCanvas().style.cursor = 'pointer';
   });
 
-  map.on('mouseleave', 'locations', function () {
+  map.on('mouseleave', 'locations',  function () {
     map.getCanvas().style.cursor = '';
   });
 
-  map.addControl(new mapboxgl.NavigationControl());
+  map.addControl(new mapboxgl.NavigationControl()); // zoom in and out
 
 });
 
-// function locationList(data) {
-//   for(var i=0; i<data.features.length; i++) {
-//
-//     var prop, list, listing, link, details;
-//
-//     prop = data.features[i].properties;
-//     list = document.getElementById('list'); // accesing html element
-//     listing = list.appendChild(document.createElement('li')); // creating list element
-//     listing.className = 'item';
-//     listing.id = 'listing-' + i;
-//
-//     link = listing.appendChild(document.createElement('a')); // creating anchor element
-//     link.href = '#';
-//     link.className = 'title';
-//     link.dataPosition = i;
-//     link.innerHTML = prop.place_name;
-//
-//     details = listing.appendChild(document.createElement('div')); // creating div element
-//     details.innerHTML = prop.wikidata;
-//
-//     if (prop.wikidata) {
-//       details.innerHTML += ' &middot; ' + prop.wikidata;
-//     }
-//
-//   }
-// }
 
+function flyToStore(currentFeature) {
+  map.flyTo({
+    center: currentFeature.geometry.coordinates,
+    zoom: 8
+  });
+}
+
+function createPopUp(currentFeature) {
+  var popUps = document.getElementsByClassName('mapboxgl-popup');
+  // Check if there is already a popup on the map and if so, remove it
+  if (popUps[0]) popUps[0].remove();
+
+  var popup = new mapboxgl.Popup({ closeOnClick: false })
+    .setLngLat(currentFeature.geometry.coordinates)
+    .setHTML('<h3>Favorite Countries</h3>' +
+      '<h4>' + currentFeature.properties.place_name + '</h4>')
+    .addTo(map);
+}
+
+// function list
 function locationList(data, i, ltext) {
-  // for(var i=0; i<data.features.length; i++) {
-
     var prop, list, listing, link, details;
 
     prop = data.features[0].properties;
+
     list = document.getElementById('list'); // access html element som heter list
     listing = list.appendChild(document.createElement('li')); // create list element
     listing.className = 'item';
@@ -336,19 +329,31 @@ function locationList(data, i, ltext) {
       details.innerHTML += ' &middot; ' + prop.wikidata;
     }
 
+    // importing text message
     var msg = ltext;
     var message = details.appendChild(document.createElement('p')); // create new element
     message.className = "ltext";
     message.innerHTML = msg;
 
     link.addEventListener('click', function(e) {
-      var clickedListing = data.features[this.dataPosition];
-      console.log(clickedListing);
+    //  var clickedListing = data.features[this.dataPosition];
+      var clickedListing = data.features[0];
+
+      flyToStore(clickedListing);
+
+      createPopUp(clickedListing);
+
+      // hightligt the country you choose
+      var activeItem = document.getElementsByClassName('active');
+       if (activeItem[0]) {
+         activeItem[0].classList.remove('active');
+       }
+       this.parentNode.classList.add('active');
     });
 
-  // }
 }
 
+// input text value function and confirmed
 function getValue(inpt) {
     var userInpt = inpt;
     userInpt = prompt("Add toGo list: ", "Write what you know about the country?");
