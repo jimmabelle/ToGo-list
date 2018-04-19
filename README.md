@@ -13,7 +13,7 @@ Then I searched another alternative and find function get value.
 Then I fixed the code in the function that load all data files ToGo list so it’s only load one and also load input text.
 7.	Then I found example how to click ToGo list. I coded in my script.js file. First, I got problem with this because It only show the first index and caught error after the second index. After many hours of testing I found the error. And it was so very little to change.
 
-### Remaining work:
+## Remaining work:
 
 1.	User can remove from ToGo list.
 I have started and style but I still under work because I don’t have much time.
