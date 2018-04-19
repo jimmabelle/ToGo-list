@@ -7,7 +7,7 @@
 3.	I also understand in documentation that I need to use geojson data. I created using mapbox studio.
 4.	In my project i made geojson file with properties and 14 countries.
 5.	I got tips from mapbox example and build my project with my own geojson data and I succeed to show the map with my geojson image marks.
-6.	After that I research how make to do list. I found an example that makes to do list of all my data. I do that and I get 14 countries in my to do list. But it was not what I wanted. I want to click and confirm and show to the list.
+6.	After that I research how make to go list. I found an example that makes to go list of all my data. I do that and I get 14 countries in my to go list. But it was not what I wanted. I want to click and confirm and show to the list.
 I tried to make mapbox popup clickable to confirm and add to the list but not succeeded.
 Then I searched another alternative and find function get value.
 Then I fixed the code in the function that load all data files ToGo list so it’s only load one and also load input text.
