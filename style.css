@@ -5,7 +5,8 @@ body {
   padding:0;
   min-width: 1000px;
   width: 100%;
-  /* overflow: hidden; */
+  font-family: 'Gaegu', cursive;
+  font-size: 120%;
 }
 
 #map {
@@ -29,6 +30,15 @@ h2#title {
   letter-spacing: 5px;
   text-decoration: underline;
   font-family: 'Gaegu', cursive;
+  font-size: 35px;
+}
+
+h3 {
+  text-align: center;
+  color: #009933;
+  letter-spacing: 5px;
+  text-decoration: underline;
+  font-family: 'Gaegu', cursive;
   font-size: 30px;
 }
 
@@ -43,4 +53,15 @@ h2#title {
 
 .item {
   padding-bottom: 20px;
+}
+
+.place {
+  text-decoration: none;
+  font-weight: bold;
+  letter-spacing: 5px;
+  color: green;
+}
+
+.place:hover {
+  color:  #004d1a;
 }

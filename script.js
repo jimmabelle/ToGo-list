@@ -257,10 +257,10 @@ map.on('load', function () {
     var coordinates = e.features[0].geometry.coordinates.slice();
     var place = e.features[0].properties.place_name;
 
-    new mapboxgl.Popup()
-      .setLngLat(coordinates)
-      .setHTML(place)
-      .addTo(map);
+    // new mapboxgl.Popup()
+    //   .setLngLat(coordinates)
+    //   .setHTML(place)
+    //   .addTo(map);
 
     // access getValue function after clicking
     var ltext = getValue();
@@ -297,8 +297,7 @@ function createPopUp(currentFeature) {
 
   var popup = new mapboxgl.Popup({ closeOnClick: false })
     .setLngLat(currentFeature.geometry.coordinates)
-    .setHTML('<h3>Favorite Countries</h3>' +
-      '<h4>' + currentFeature.properties.place_name + '</h4>')
+    .setHTML('<h3>' + currentFeature.properties.place_name + '</h3>')
     .addTo(map);
 }
 
@@ -315,7 +314,7 @@ function locationList(data, i, ltext) {
 
     link = listing.appendChild(document.createElement('a')); // create anchor element
     link.href = '#';
-    link.className = 'title';
+    link.className = 'place';
     link.dataPosition = i;
     link.innerHTML = prop.place_name;
 
