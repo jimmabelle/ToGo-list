@@ -245,15 +245,24 @@ map.on('load', function () {
     source: {
       type: 'geojson',
       data: countries
-    },
+     },
     layout: {
-      'icon-image': 'restaurant-15',
+      'icon-image': 'star-15',
       'icon-allow-overlap': true,
     }
   });
 
   // map click event
   map.on('click', 'locations', function (e) {
+   // var coordinates = e.features[0].geometry.coordinates.slice();
+   // var place = e.features[0].properties.place_name;
+   // place.className = 'location';
+   //
+   // new mapboxgl.Popup()
+   //   .setLngLat(coordinates)
+   //   .setHTML('<h4>' + place + '</h4>')
+   //   .addTo(map);
+
     var ltext = getValue();   // access getValue function after clicking
     if (ltext) {  // if the condition is true add to list
       // access locationList function
