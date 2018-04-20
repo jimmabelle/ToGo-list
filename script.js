@@ -254,16 +254,14 @@ map.on('load', function () {
 
   // map click event
   map.on('click', 'locations', function (e) {
-
-    // access getValue function after clicking
-    var ltext = getValue();
-    // if the condition is true add to list
-    if (ltext) {
+    var ltext = getValue();   // access getValue function after clicking
+    if (ltext) {  // if the condition is true add to list
       // access locationList function
-      locationList(e, k, ltext);  // parameter e actual layer, k list number, l text/personal input text
+      // parameter e actual layer, k list number, l text/personal input text
+      locationList(e, k, ltext);
       k++; // increment the list number
-  }
-});
+    }
+  });
 
   map.on('mouseenter', 'locations', function () {
     map.getCanvas().style.cursor = 'pointer';
@@ -322,7 +320,6 @@ function locationList(data, i, ltext) {
     close.appendChild(document.createTextNode('\u00D7'));
     close.className = 'closeBttn';
 
-
     // create text message to the list
     var msg = ltext;
     var message = details.appendChild(document.createElement('p')); // create new element
@@ -331,15 +328,13 @@ function locationList(data, i, ltext) {
 
     // event for the list countries you created
     link.addEventListener('click', function(e) {
-      var clickedListing = data.features[0];
-
+      var clickedListing = data.features[0];  // store and access the data features
       flyToStore(clickedListing);
       createPopUp(clickedListing);
 
-      // hightligting the country you choose
-      var activeItem = document.getElementsByClassName('active');
+      var activeItem = document.getElementsByClassName('active'); // hightligting the country you choose
        if (activeItem[0]) {
-       activeItem[0].classList.remove('active');
+         activeItem[0].classList.remove('active');
        }
        this.parentNode.classList.add('active');
     });
