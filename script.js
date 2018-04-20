@@ -254,8 +254,8 @@ map.on('load', function () {
 
   // map click event
   map.on('click', 'locations', function (e) {
-    var coordinates = e.features[0].geometry.coordinates.slice();
-    var place = e.features[0].properties.place_name;
+    // var coordinates = e.features[0].geometry.coordinates.slice();
+    // var place = e.features[0].properties.place_name;
 
     // new mapboxgl.Popup()
     //   .setLngLat(coordinates)
