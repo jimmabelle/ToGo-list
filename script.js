@@ -232,143 +232,129 @@ var countries = {
 
 // map features
 var map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v9',
-    center: [17.675409, 64.964875],
-    zoom: 1
+  container: 'map',
+  style: 'mapbox://styles/mapbox/streets-v9',
+  center: [17.675409, 64.964875],
+  zoom: 1
 });
 
 map.on('load', function () {
-  map.addLayer({
-    id: 'locations',
-    type: 'symbol',
-    source: {
-      type: 'geojson',
-      data: countries
-     },
-    layout: {
-      'icon-image': 'star-15',
-      'icon-allow-overlap': true,
-    }
-  });
-
-  // map click event
-  map.on('click', 'locations', function (e) {
-   // var coordinates = e.features[0].geometry.coordinates.slice();
-   // var place = e.features[0].properties.place_name;
-   // place.className = 'location';
-   //
-   // new mapboxgl.Popup()
-   //   .setLngLat(coordinates)
-   //   .setHTML('<h4>' + place + '</h4>')
-   //   .addTo(map);
-
-    var ltext = getValue();   // access getValue function after clicking
-    if (ltext) {  // if the condition is true add to list
-      // access locationList function
-      // parameter e actual layer, k list number, l text/personal input text
-      locationList(e, k, ltext);
-      k++; // increment the list number
-    }
-  });
-
-  map.on('mouseenter', 'locations', function () {
-    map.getCanvas().style.cursor = 'pointer';
-  });
-
-  map.on('mouseleave', 'locations',  function () {
-    map.getCanvas().style.cursor = '';
-  });
-
-  map.addControl(new mapboxgl.NavigationControl()); // zoom in and out
+map.addLayer({
+  id: 'locations',
+  type: 'symbol',
+  source: {
+    type: 'geojson',
+    data: countries
+   },
+  layout: {
+    'icon-image': 'star-15',
+    'icon-allow-overlap': true,
+  }
 });
 
-// filter function
-// function filterLoc() {
-//   var filterEl = document.getElementById('filter'); // get the lement id filter
-//   var formEl = filter.appendChild(document.createElement('form'));
-//   var inptField = formEl.appendChild(document.createElement('input'));
-//   inptField.setAttribute('type', 'text');
-//   inptField.setAttribute('placeholder', 'name');
-// }
+// map click event
+map.on('click', 'locations', function (e) {
+  var ltext = getValue();   // access getValue function after clicking
+  if (ltext) {  // if the condition is true add to list
+    // access locationList function
+    // parameter e actual layer, k list number, l text/personal input text
+    locationList(e, k, ltext);
+    k++; // increment the list number
+  }
+});
+map.on('mouseenter', 'locations', function () {
+  map.getCanvas().style.cursor = 'pointer';
+});
+map.on('mouseleave', 'locations',  function () {
+  map.getCanvas().style.cursor = '';
+});
+map.addControl(new mapboxgl.NavigationControl()); // zoom in and out
+});
 
-function flyToStore(currentFeature) {
-  map.flyTo({
-    center: currentFeature.geometry.coordinates,
-    zoom: 8
-  });
-}
-
-function createPopUp(currentFeature) {
-  var popUps = document.getElementsByClassName('mapboxgl-popup');
-  // Check if there is already a popup on the map and if so, remove it
-  if (popUps[0]) popUps[0].remove();
-
-  var popup = new mapboxgl.Popup({ closeOnClick: false })
-    .setLngLat(currentFeature.geometry.coordinates)
-    .setHTML('<h3>' + currentFeature.properties.place_name + '</h3>')
-    .addTo(map);
-}
-
-// function list
-function locationList(data, i, ltext) {
-    var prop, list, listing, link, details;
-
-    prop = data.features[0].properties;
-
-    list = document.getElementById('list'); // access html element som heter list
-    listing = list.appendChild(document.createElement('li')); // create list element
-    listing.className = 'item';
-    listing.id = 'listing-' + i;
-
-    link = listing.appendChild(document.createElement('a')); // create anchor element
-    link.href = '#';
-    link.className = 'place';
-    link.dataPosition = i;
-    link.innerHTML = prop.place_name;
-
-    details = listing.appendChild(document.createElement('div')); // create div element
-    details.innerHTML = prop.short_code;
-    if (prop.wikidata) {
-      details.innerHTML += ' &middot; ' + prop.wikidata;
-    }
-
-    // close button
-    var close = listing.appendChild(document.createElement('span'));
-    close.appendChild(document.createTextNode('\u00D7'));
-    close.className = 'closeBttn';
-
-    // create text message to the list
-    var msg = ltext;
-    var message = details.appendChild(document.createElement('p')); // create new element
-    message.className = "ltext";
-    message.innerHTML = msg;
-
-    // event for the list countries you created
-    link.addEventListener('click', function(e) {
-      var clickedListing = data.features[0];  // store and access the data features
-      flyToStore(clickedListing);
-      createPopUp(clickedListing);
-
-      var activeItem = document.getElementsByClassName('active'); // hightligting the country you choose
-       if (activeItem[0]) {
-         activeItem[0].classList.remove('active');
-       }
-       this.parentNode.classList.add('active');
-    });
-
-    // event delegation list
-    close.addEventListener('click', function(e){
-      var activeItem2 = document.getElementsByClassName('active');
-      if (activeItem2) {
-       listing.remove(activeItem2);
-      }
-    });
+// input search value function
+function searchtValue(inpt) {
+  console.log ('jag är här');
+  var filterEl = document.getElementById('filterList'); // div element id filter
+  var inptText = document.getElementById('text');  // input element id text
+  inptText.value.toUpperCase();
 }
 
 // input text value function and confirmation
 function getValue(inpt) {
-    var userInpt = inpt;
-    userInpt = prompt("Add toGo list: ", "Write what you know about the country?");
-    return userInpt;
+  var userInpt = inpt;
+  userInpt = prompt("Add toGo list: ", "Write what you know about the country?");
+  return userInpt;
+}
+
+function flyToStore(currentFeature) {
+map.flyTo({
+  center: currentFeature.geometry.coordinates,
+  zoom: 8
+});
+}
+
+function createPopUp(currentFeature) {
+var popUps = document.getElementsByClassName('mapboxgl-popup');
+// Check if there is already a popup on the map and if so, remove it
+if (popUps[0]) popUps[0].remove();
+
+var popup = new mapboxgl.Popup({ closeOnClick: false })
+  .setLngLat(currentFeature.geometry.coordinates)
+  .setHTML('<h3>' + currentFeature.properties.place_name + '</h3>')
+  .addTo(map);
+}
+
+// function list
+function locationList(data, i, ltext) {
+  var prop = data.features[0].properties;
+
+  var list = document.getElementById('list'); // get element list id from html
+  var listing = list.appendChild(document.createElement('li')); // create list element to html
+  listing.className = 'item';
+  listing.id = 'listing-' + i;
+
+  var link = listing.appendChild(document.createElement('a')); // create anchor element to html
+  link.href = '#';
+  link.className = 'place';
+  link.dataPosition = i;
+  link.innerHTML = prop.place_name;
+
+  var details = listing.appendChild(document.createElement('div')); // create div element to html
+  details.innerHTML = prop.short_code;
+  if (prop.wikidata) {
+    details.innerHTML += ' &middot; ' + prop.wikidata;
   }
+
+  // close button
+  var close = listing.appendChild(document.createElement('span'));
+  close.appendChild(document.createTextNode('\u00D7'));
+  close.className = 'closeBttn';
+
+  // input message and append to the list
+  var msg = ltext;
+  var message = details.appendChild(document.createElement('p')); // create new element
+  message.className = "ltext";
+  message.innerHTML = msg;
+
+  // event for the list countries you created
+  link.addEventListener('click', function(e) {
+    var clickedListing = data.features[0];  // store and access the data features
+
+    flyToStore(clickedListing);
+    createPopUp(clickedListing);
+
+    var activeItem = document.getElementsByClassName('active'); // hightligting the country you choose
+     if (activeItem[0]) {
+       activeItem[0].classList.remove('active');
+     }
+     this.parentNode.classList.add('active');
+  });
+
+  // event delegation list
+  close.addEventListener('click', function(e){
+    var activeItem2 = document.getElementsByClassName('active');
+    if (activeItem2) {
+     listing.remove(activeItem2);
+    }
+  });
+}
