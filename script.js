@@ -283,6 +283,15 @@ map.on('load', function () {
   map.addControl(new mapboxgl.NavigationControl()); // zoom in and out
 });
 
+// filter function
+// function filterLoc() {
+//   var filterEl = document.getElementById('filter'); // get the lement id filter
+//   var formEl = filter.appendChild(document.createElement('form'));
+//   var inptField = formEl.appendChild(document.createElement('input'));
+//   inptField.setAttribute('type', 'text');
+//   inptField.setAttribute('placeholder', 'name');
+// }
+
 function flyToStore(currentFeature) {
   map.flyTo({
     center: currentFeature.geometry.coordinates,

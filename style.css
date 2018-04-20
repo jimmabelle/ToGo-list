@@ -47,6 +47,28 @@ h3 {
      font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
  }
 
+ #filter {
+   text-align: center;
+ }
+
+ #text {
+   width: 80%;
+   margin: 8px 0;
+   display: inline-block;
+   border: 1px solid #009933;
+   box-shadow: inset 0 1px 3px #ddd;
+   border-radius: 4px;
+   -webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box;
+   box-sizing: border-box;
+   padding-left: 20px;
+   padding-right: 20px;
+   padding-top: 12px;
+   padding-bottom: 12px;
+ }
+
+ input:focus{outline:none;}
+
 .ltext {
   margin: 0;
 }
