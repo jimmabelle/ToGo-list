@@ -69,6 +69,16 @@ h3 {
 
  input:focus{outline:none;}
 
+ #submit {
+   border: none;
+   background: #009933;
+   height: 40px;
+   font-size: 15px;
+   color: green;
+   border-radius: 4px;
+   color: #fff;
+ }
+
 .ltext {
   margin: 0;
 }
