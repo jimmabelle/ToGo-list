@@ -1,5 +1,5 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiamltbWFiZWxsZSIsImEiOiJjamZ5MTBjeHAyNnYyMndxbjAyOTI0Y24yIn0.mvyT35xOV0oEtad34I0Vgg';
-// var k = 0;  // initial number for todo list
+var k = 0;  // initial number for todo list
 // geojson data
 var countries = {
   "features": [
@@ -261,8 +261,6 @@ map.on('load', function () {
     //   .setLngLat(coordinates)
     //   .setHTML(place)
     //   .addTo(map);
-
-    var k = 0;
 
     // access getValue function after clicking
     var ltext = getValue();
