@@ -338,6 +338,14 @@ function locationList(data, i, ltext) {
        }
        this.parentNode.classList.add('active');
     });
+
+    // event delegation list
+    close.addEventListener('click', function(e){
+      var activeItem2 = document.getElementsByClassName('active');
+      if (activeItem2) {
+       listing.remove(activeItem2);
+      }
+    });
 }
 
 // input text value function and confirmation
