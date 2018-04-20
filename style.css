@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Gaegu');
+
 body {
   margin:0;
   padding:0;
@@ -26,6 +28,8 @@ h2#title {
   color: #009933;
   letter-spacing: 5px;
   text-decoration: underline;
+  font-family: 'Gaegu', cursive;
+  font-size: 30px;
 }
 
 .mapboxgl-popup {
