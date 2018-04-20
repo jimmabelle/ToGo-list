@@ -21,6 +21,13 @@ body {
   background-color: #fff;
 }
 
+h2#title {
+  text-align: center;
+  color: #009933;
+  letter-spacing: 5px;
+  text-decoration: underline;
+}
+
 .mapboxgl-popup {
      max-width: 400px;
      font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
@@ -28,4 +35,8 @@ body {
 
 .ltext {
   margin: 0;
+}
+
+.item {
+  padding-bottom: 20px;
 }
