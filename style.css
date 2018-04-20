@@ -51,17 +51,27 @@ h3 {
   margin: 0;
 }
 
-.item {
+li.item {
   padding-bottom: 20px;
+  position: relative;
 }
 
-.place {
+a.place {
   text-decoration: none;
   font-weight: bold;
   letter-spacing: 5px;
   color: green;
 }
 
-.place:hover {
+a.place:hover {
   color:  #004d1a;
+}
+
+span.closeBttn {
+  color: #009933;
+  font-weight: bold;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 10%;
 }

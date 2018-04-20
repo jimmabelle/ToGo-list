@@ -1,5 +1,5 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiamltbWFiZWxsZSIsImEiOiJjamZ5MTBjeHAyNnYyMndxbjAyOTI0Y24yIn0.mvyT35xOV0oEtad34I0Vgg';
-var k = 0;  // initial number for todo list
+// var k = 0;  // initial number for todo list
 // geojson data
 var countries = {
   "features": [
@@ -262,6 +262,8 @@ map.on('load', function () {
     //   .setHTML(place)
     //   .addTo(map);
 
+    var k = 0;
+
     // access getValue function after clicking
     var ltext = getValue();
     // if the condition is true add to list
@@ -320,35 +322,39 @@ function locationList(data, i, ltext) {
 
     details = listing.appendChild(document.createElement('div')); // create div element
     details.innerHTML = prop.short_code;
-
     if (prop.wikidata) {
       details.innerHTML += ' &middot; ' + prop.wikidata;
     }
 
-    // importing text message
+    // close button
+    var close = listing.appendChild(document.createElement('span'));
+    close.appendChild(document.createTextNode('\u00D7'));
+    close.className = 'closeBttn';
+
+
+    // create text message to the list
     var msg = ltext;
     var message = details.appendChild(document.createElement('p')); // create new element
     message.className = "ltext";
     message.innerHTML = msg;
 
+    // event for the list countries you created
     link.addEventListener('click', function(e) {
-    //  var clickedListing = data.features[this.dataPosition];
       var clickedListing = data.features[0];
 
       flyToStore(clickedListing);
-
       createPopUp(clickedListing);
 
-      // hightligt the country you choose
+      // hightligting the country you choose
       var activeItem = document.getElementsByClassName('active');
        if (activeItem[0]) {
-         activeItem[0].classList.remove('active');
+       activeItem[0].classList.remove('active');
        }
        this.parentNode.classList.add('active');
     });
 }
 
-// input text value function and confirmed
+// input text value function and confirmation
 function getValue(inpt) {
     var userInpt = inpt;
     userInpt = prompt("Add toGo list: ", "Write what you know about the country?");
