@@ -299,7 +299,8 @@ function createPopUp(currentFeature) {
 // function list
 function locationList(data, i, ltext) {
   var prop = data.features[0].properties;
-
+  var arr = new Array;
+  var xa  = 0;
   var list = document.getElementById('list'); // get element list id from html
   var listing = list.appendChild(document.createElement('li')); // create list element to html
   listing.className = 'item';
@@ -364,8 +365,9 @@ function locationList(data, i, ltext) {
       var inptValFirst = inptVal.slice(0, 1);
       var item = document.getElementsByTagName('li');   // list tag element
       var itemPlace = document.getElementsByClassName('place');  // anchor class name place
-      console.log(inptValFirst);
 
+      var xa  = 0;
+      arr = [];
       //for loop
       for(var j=0; j<item.length; j++) {
         var plce =  itemPlace[j].innerHTML;
@@ -377,54 +379,17 @@ function locationList(data, i, ltext) {
              var itemRemove = item;
              var itemRemove2 = item;
              var itemRemoveVal = itemRemove2[j].innerHTML;
-              console.log('elements content: ' + itemRemoveVal);
+              console.log('elements content removed: ' + itemRemoveVal);
 
               if (itemRemoveVal) {
                    listing.remove(itemRemoveVal);
+                   arr [xa] = itemRemoveVal;
+                   xa++;
+                   console.log (arr);
               }
            }
       }
 
   });
-
-
-  // event form list
-  // var elForm = document.getElementById('form-1');
-  // elForm.addEventListener('submit', function() {
-  //
-  //   console.log('först gång');
-  //
-  //   var inptItem = document.getElementById('textItem');  // input id element
-  //   var inptVal = inptItem.value.toUpperCase();
-  //   var inptValFirst = inptVal.slice(0, 1);
-  //   var item = document.getElementsByTagName('li');   // list tag element
-  //   var itemPlace = document.getElementsByClassName('place');  // anchor class name place
-  //
-  //   // for loop
-  //   for (var j=0; j<item.length; j++) {
-  //     var plce =  itemPlace[j].innerHTML;
-  //     var plceFirst = plce.slice(0, 1);
-  //
-  //       console.log(j);
-  //
-  //       if (inptValFirst != plceFirst ) {
-  //
-  //         console.log ('jag är här');
-  //
-  //           var itemRemove = document.getElementsByTagName('li');
-  //           var itemRemove2 = document.getElementsByTagName('li');
-  //           var itemRemoveVal = itemRemove2[j].innerHTML;
-  //
-  //             console.log('elements content: ' + itemRemoveVal);
-  //
-  //             if (itemRemoveVal) {
-  //                 listing.remove(itemRemoveVal);
-  //             }
-  //       }
-  //       console.log(x);
-  //       console.log(plce);
-  //       console.log(plceFirst);
-  //     }
-  // });
 
 }
