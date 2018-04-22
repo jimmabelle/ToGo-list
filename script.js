@@ -271,14 +271,6 @@ map.on('mouseleave', 'locations',  function () {
 map.addControl(new mapboxgl.NavigationControl()); // zoom in and out
 });
 
-// input search value function
-function searchtValue(inpt) {
-  console.log ('jag är här');
-  var filterEl = document.getElementById('filterList'); // div element id filter
-  var inptText = document.getElementById('text');  // input element id text
-  inptText.value.toUpperCase();
-}
-
 // input text value function and confirmation
 function getValue(inpt) {
   var userInpt = inpt;
@@ -336,8 +328,9 @@ function locationList(data, i, ltext) {
   message.className = "ltext";
   message.innerHTML = msg;
 
+
   // event for the list countries you created
-  link.addEventListener('click', function(e) {
+  link.addEventListener('click', function() {
     var clickedListing = data.features[0];  // store and access the data features
 
     flyToStore(clickedListing);
@@ -351,10 +344,46 @@ function locationList(data, i, ltext) {
   });
 
   // event delegation list
-  close.addEventListener('click', function(e){
+  close.addEventListener('click', function() {
     var activeItem2 = document.getElementsByClassName('active');
+    console.log ('activeItem2: ' + activeItem2.value);
     if (activeItem2) {
      listing.remove(activeItem2);
     }
   });
+
+  // event form list
+  var elForm = document.getElementById('form-1');
+  elForm.addEventListener('submit', function() {
+    console.log ('först gång')
+    var inptItem = document.getElementById('textItem');  //   console.log(inptItem);
+    var inptVal = inptItem.value.toUpperCase();
+    var inptValFirst = inptVal.slice(0, 1);
+    var item = document.getElementsByTagName('li');
+    var itemPlace = document.getElementsByClassName('place');
+
+    // for loop
+    for (var j=0; j<item.length; j++) {
+      var x = item[j];
+      var plce =  itemPlace[j].innerHTML;
+      var plceFirst = plce.slice(0, 1);
+        console.log(j);
+
+        if (inptValFirst != plceFirst ) {
+          console.log ('jag är här');
+            var itemRemove = item;
+            var itemRemove2 = item;
+            var itemRemoveVal = itemRemove2[j].innerHTML;
+              console.log('elements content: ' + itemRemoveVal);
+
+              if (itemRemoveVal){
+                  listing.remove(itemRemoveVal);
+              }
+        }
+        // console.log(x);
+        // console.log(plce);
+        // console.log(plceFirst);
+      }
+  });
+
 }
