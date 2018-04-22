@@ -279,21 +279,21 @@ function getValue(inpt) {
 }
 
 function flyToStore(currentFeature) {
-map.flyTo({
-  center: currentFeature.geometry.coordinates,
-  zoom: 8
-});
+  map.flyTo({
+    center: currentFeature.geometry.coordinates,
+    zoom: 8
+  });
 }
 
 function createPopUp(currentFeature) {
-var popUps = document.getElementsByClassName('mapboxgl-popup');
-// Check if there is already a popup on the map and if so, remove it
-if (popUps[0]) popUps[0].remove();
+  var popUps = document.getElementsByClassName('mapboxgl-popup');
+  // Check if there is already a popup on the map and if so, remove it
+  if (popUps[0]) popUps[0].remove();
 
-var popup = new mapboxgl.Popup({ closeOnClick: false })
-  .setLngLat(currentFeature.geometry.coordinates)
-  .setHTML('<h3>' + currentFeature.properties.place_name + '</h3>')
-  .addTo(map);
+  var popup = new mapboxgl.Popup({ closeOnClick: false })
+    .setLngLat(currentFeature.geometry.coordinates)
+    .setHTML('<h3>' + currentFeature.properties.place_name + '</h3>')
+    .addTo(map);
 }
 
 // function list
@@ -328,6 +328,8 @@ function locationList(data, i, ltext) {
   message.className = "ltext";
   message.innerHTML = msg;
 
+  // form input filter
+  var formFilter = document.getElementById('form-1');
 
   // event for the list countries you created
   link.addEventListener('click', function() {
@@ -352,38 +354,77 @@ function locationList(data, i, ltext) {
     }
   });
 
-  // event form list
-  var elForm = document.getElementById('form-1');
-  elForm.addEventListener('submit', function() {
-    console.log ('först gång')
-    var inptItem = document.getElementById('textItem');  //   console.log(inptItem);
-    var inptVal = inptItem.value.toUpperCase();
-    var inptValFirst = inptVal.slice(0, 1);
-    var item = document.getElementsByTagName('li');
-    var itemPlace = document.getElementsByClassName('place');
+  // event form
+  formFilter.addEventListener('submit', function() {
 
-    // for loop
-    for (var j=0; j<item.length; j++) {
-      var x = item[j];
-      var plce =  itemPlace[j].innerHTML;
-      var plceFirst = plce.slice(0, 1);
-        console.log(j);
+    console.log('första gång');
 
-        if (inptValFirst != plceFirst ) {
-          console.log ('jag är här');
-            var itemRemove = item;
-            var itemRemove2 = item;
-            var itemRemoveVal = itemRemove2[j].innerHTML;
+      var inptItem = document.getElementById('textItem');  // input id element
+      var inptVal = inptItem.value.toUpperCase();
+      var inptValFirst = inptVal.slice(0, 1);
+      var item = document.getElementsByTagName('li');   // list tag element
+      var itemPlace = document.getElementsByClassName('place');  // anchor class name place
+      console.log(inptValFirst);
+
+      //for loop
+      for(var j=0; j<item.length; j++) {
+        var plce =  itemPlace[j].innerHTML;
+        var plceFirst = plce.slice(0, 1);
+          console.log(j);
+
+           if (inptValFirst != plceFirst ) {
+             console.log ('jag är här');
+             var itemRemove = item;
+             var itemRemove2 = item;
+             var itemRemoveVal = itemRemove2[j].innerHTML;
               console.log('elements content: ' + itemRemoveVal);
 
-              if (itemRemoveVal){
-                  listing.remove(itemRemoveVal);
+              if (itemRemoveVal) {
+                   listing.remove(itemRemoveVal);
               }
-        }
-        // console.log(x);
-        // console.log(plce);
-        // console.log(plceFirst);
+           }
       }
+
   });
+
+
+  // event form list
+  // var elForm = document.getElementById('form-1');
+  // elForm.addEventListener('submit', function() {
+  //
+  //   console.log('först gång');
+  //
+  //   var inptItem = document.getElementById('textItem');  // input id element
+  //   var inptVal = inptItem.value.toUpperCase();
+  //   var inptValFirst = inptVal.slice(0, 1);
+  //   var item = document.getElementsByTagName('li');   // list tag element
+  //   var itemPlace = document.getElementsByClassName('place');  // anchor class name place
+  //
+  //   // for loop
+  //   for (var j=0; j<item.length; j++) {
+  //     var plce =  itemPlace[j].innerHTML;
+  //     var plceFirst = plce.slice(0, 1);
+  //
+  //       console.log(j);
+  //
+  //       if (inptValFirst != plceFirst ) {
+  //
+  //         console.log ('jag är här');
+  //
+  //           var itemRemove = document.getElementsByTagName('li');
+  //           var itemRemove2 = document.getElementsByTagName('li');
+  //           var itemRemoveVal = itemRemove2[j].innerHTML;
+  //
+  //             console.log('elements content: ' + itemRemoveVal);
+  //
+  //             if (itemRemoveVal) {
+  //                 listing.remove(itemRemoveVal);
+  //             }
+  //       }
+  //       console.log(x);
+  //       console.log(plce);
+  //       console.log(plceFirst);
+  //     }
+  // });
 
 }
