@@ -349,6 +349,7 @@ function locationList(data, i, ltext) {
 
   // event delegation list
   close.addEventListener('click', function(e) {
+    event.preventDefault();
     var activeItem2 = document.getElementsByClassName('active');
     console.log ('activeItem2: ' + activeItem2.value);
     if (activeItem2) {
