@@ -299,8 +299,7 @@ function createPopUp(currentFeature) {
 // function list
 function locationList(data, i, ltext) {
   var prop = data.features[0].properties;
-  var arr = new Array;
-  var xa  = 0;
+
   var list = document.getElementById('list'); // get element list id from html
   var listing = list.appendChild(document.createElement('li')); // create list element to html
   listing.className = 'item';
@@ -333,7 +332,9 @@ function locationList(data, i, ltext) {
   var formFilter = document.getElementById('form-1');
 
   // event for the list countries you created
-  link.addEventListener('click', function() {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+
     var clickedListing = data.features[0];  // store and access the data features
 
     flyToStore(clickedListing);
@@ -347,7 +348,7 @@ function locationList(data, i, ltext) {
   });
 
   // event delegation list
-  close.addEventListener('click', function() {
+  close.addEventListener('click', function(e) {
     var activeItem2 = document.getElementsByClassName('active');
     console.log ('activeItem2: ' + activeItem2.value);
     if (activeItem2) {
@@ -356,8 +357,8 @@ function locationList(data, i, ltext) {
   });
 
   // event form
-  formFilter.addEventListener('submit', function() {
-
+  formFilter.addEventListener('submit', function(e) {
+    event.preventDefault();
     console.log('första gång');
 
       var inptItem = document.getElementById('textItem');  // input id element
@@ -366,9 +367,9 @@ function locationList(data, i, ltext) {
       var item = document.getElementsByTagName('li');   // list tag element
       var itemPlace = document.getElementsByClassName('place');  // anchor class name place
 
+      var arr = [];
       var xa  = 0;
-      arr = [];
-      //for loop
+
       for(var j=0; j<item.length; j++) {
         var plce =  itemPlace[j].innerHTML;
         var plceFirst = plce.slice(0, 1);
@@ -383,7 +384,7 @@ function locationList(data, i, ltext) {
 
               if (itemRemoveVal) {
                    listing.remove(itemRemoveVal);
-                   arr [xa] = itemRemoveVal;
+                   arr[xa] = itemRemoveVal;
                    xa++;
                    console.log (arr);
               }
