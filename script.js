@@ -351,7 +351,6 @@ function locationList(data, i, ltext) {
   close.addEventListener('click', function(e) {
     event.preventDefault();
     var activeItem2 = document.getElementsByClassName('active');
-    console.log ('activeItem2: ' + activeItem2.value);
     if (activeItem2) {
      listing.remove(activeItem2);
     }
@@ -360,8 +359,6 @@ function locationList(data, i, ltext) {
   // event form
   formFilter.addEventListener('submit', function(e) {
     event.preventDefault();
-    console.log('första gång');
-
       var inptItem = document.getElementById('textItem');  // input id element
       var inptVal = inptItem.value.toUpperCase();
       var inptValFirst = inptVal.slice(0, 1);
@@ -369,25 +366,24 @@ function locationList(data, i, ltext) {
       var itemPlace = document.getElementsByClassName('place');  // anchor class name place
 
       var arr = [];
-      var xa  = 0;
+      var x  = 0;
 
       for(var j=0; j<item.length; j++) {
         var plce =  itemPlace[j].innerHTML;
         var plceFirst = plce.slice(0, 1);
-          console.log(j);
 
            if (inptValFirst != plceFirst ) {
-             console.log ('jag är här');
              var itemRemove = item;
              var itemRemove2 = item;
              var itemRemoveVal = itemRemove2[j].innerHTML;
               console.log('elements content removed: ' + itemRemoveVal);
 
               if (itemRemoveVal) {
-                   listing.remove(itemRemoveVal);
-                   arr[xa] = itemRemoveVal;
-                   xa++;
-                   console.log (arr);
+               listing.remove(itemRemoveVal);
+               var addNewItem = arr.push(itemRemoveVal);
+               x++;
+                   console.log(arr);
+                   console.log(addNewItem);
               }
            }
       }
