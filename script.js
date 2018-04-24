@@ -376,14 +376,11 @@ function locationList(data, i, ltext) {
              var itemRemove = item;
              var itemRemove2 = item;
              var itemRemoveVal = itemRemove2[j].innerHTML;
-              console.log('elements content removed: ' + itemRemoveVal);
 
               if (itemRemoveVal) {
                listing.remove(itemRemoveVal);
                var addNewItem = arr.push(itemRemoveVal);
                x++;
-                   console.log(arr);
-                   console.log(addNewItem);
               }
            }
       }
