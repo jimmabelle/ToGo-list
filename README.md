@@ -17,8 +17,8 @@ Then I fixed the code in the function that load all data files ToGo-list so it�
 This is my solution. For each item list that not match I remove that list item from toGo-list and also store the removed data in an array.
 There is some bug in script that sometimes filter to much. My solution is the filter.
 To restore the data from array is not in this case yet. Its possible to do but you must have some dialog in the form.
-
 10.	Just now there is horrible issues that’s out of my control. Its like this, suddenly on my computer the form filter is not really working its like no console working in that section and it seems that its coming more than one data. Console output result is two times and the code are not working.
 I solved the issue this morning on my computer. I wrote again the code that I made to make for me to see what’s really the problem on my code. I didn’t find the problem. And its suddenly worked again at my computer.
 11.	After, I commit changes from local to Github with working code. But when I download the project to my other computer, the issue is still there.
 So, I believe if you download the code you got the same problem I the filter section.
+12. I have fixed no. 11 issue.
